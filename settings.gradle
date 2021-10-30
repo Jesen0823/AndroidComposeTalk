@@ -10,3 +10,4 @@ rootProject.name = "AndroidComposeTalk"
 include ':app'
 include ':weathercompose'
 include ':timercompose'
+include ':moviedemocompose'
