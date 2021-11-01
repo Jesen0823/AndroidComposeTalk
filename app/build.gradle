@@ -65,6 +65,7 @@ dependencies {
 
     // 类似ViewPager
     implementation "com.google.accompanist:accompanist-pager:$accompanistPagerVersion"
+
     //implementation "androidx.compose.animation:animation:$compose_version"
     //implementation "androidx.compose.compiler:compiler:$compose_version"
     //implementation "androidx.compose.foundation:foundation:$compose_version"
