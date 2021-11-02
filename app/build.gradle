@@ -66,6 +66,12 @@ dependencies {
     // 类似ViewPager
     implementation "com.google.accompanist:accompanist-pager:$accompanistPagerVersion"
 
+    // 导航
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha06")
+    // Icons部分图标找不到的问题
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+
+
     //implementation "androidx.compose.animation:animation:$compose_version"
     //implementation "androidx.compose.compiler:compiler:$compose_version"
     //implementation "androidx.compose.foundation:foundation:$compose_version"
