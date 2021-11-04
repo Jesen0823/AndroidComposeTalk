@@ -1,66 +1,58 @@
-package com.jesen.androidcomposetalk
+package com.jesen.androidcomposetalk.pages
 
-import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.*
+import com.jesen.androidcomposetalk.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.KeyboardType.Companion.Password
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.jesen.androidcomposetalk.ui.theme.*
+import androidx.compose.ui.unit.sp
+import com.jesen.androidcomposetalk.nav.PageRoute
+import com.jesen.androidcomposetalk.nav.doPageNavBack
+import com.jesen.androidcomposetalk.nav.doPageNavigationTo
+import com.jesen.androidcomposetalk.ui.theme.InputTextField
+import com.jesen.androidcomposetalk.ui.theme.TopBarView
+import com.jesen.androidcomposetalk.ui.theme.inputTogButton
 import com.jesen.androidcomposetalk.viewmodel.InputViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
-class LoginActivity : ComponentActivity() {
+@Composable
+fun LoginPage(activity: ComponentActivity) {
+    val inputViewModel by activity.viewModels<InputViewModel>()
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
 
-    private val inputViewModel by viewModels<InputViewModel>()
+    Scaffold(
+        topBar = { LoginTopBarView(scope) },
+        scaffoldState = scaffoldState
+    ) {
+        Box(Modifier.fillMaxSize()) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+            HeaderEffect(inputViewModel)
 
-        setContent {
-            AndroidComposeTalkTheme {
-                val scaffoldState = rememberScaffoldState()
-                val scope = rememberCoroutineScope()
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Scaffold(
-                        topBar = { LoginTopBarView() },
-                        scaffoldState = scaffoldState
-                    ) {
-                        Box(Modifier.fillMaxSize()) {
-
-                            val isHide = remember { mutableStateOf(false) }
-                            HeaderEffect(inputViewModel)
-
-                            Column(
-                                modifier = Modifier
-                                    .padding(5.dp, 120.dp, 5.dp, 0.dp)
-                                    .fillMaxWidth()
-                            ) {
-                                Spacer(modifier = Modifier.height(2.dp))
-                                InputLoginScreen(inputViewModel, scaffoldState, scope, isHide)
-                            }
-                        }
-                    }
-                }
+            Column(
+                modifier = Modifier
+                    .padding(5.dp, 120.dp, 5.dp, 0.dp)
+                    .fillMaxWidth()
+            ) {
+                Spacer(modifier = Modifier.height(2.dp))
+                InputLoginScreen(inputViewModel, scaffoldState, scope)
             }
         }
     }
-
 }
 
 @Composable
@@ -68,7 +60,6 @@ fun InputLoginScreen(
     viewModel: InputViewModel,
     scaffoldState: ScaffoldState,
     scope: CoroutineScope,
-    isHide: MutableState<Boolean>
 ) {
     Column(
         Modifier.fillMaxWidth(),
@@ -90,7 +81,7 @@ fun InputLoginScreen(
             type = "password",
             label = "密码",
             leadingIcon = Icons.Default.Lock,
-            keyboardOptions = KeyboardOptions(keyboardType = Password),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             value = viewModel.pwd,
             hint = "请输入密码",
             onValueChanged = { viewModel.onPwdChange(it) },
@@ -124,16 +115,29 @@ fun HeaderEffect(viewModel: InputViewModel) {
             painter = painterResource(id = if (viewModel.isHide) R.drawable.head_right_protect else R.drawable.head_right),
             contentDescription = "right image"
         )
+
     }
 }
 
 
 @Composable
-fun LoginTopBarView() {
+fun LoginTopBarView(scope: CoroutineScope) {
     TopBarView(
-        backClick = { },
-        actionsClick = { },
-        actionsText = "注册",
+        iconEvent = {
+            IconButton(onClick = {
+                doPageNavBack(route = null)
+            }) {
+                Icon(Icons.Filled.ArrowBack, null)
+            }
+        },
+        actionEvent = {
+            TextButton(onClick = {
+                scope.launch {doPageNavigationTo(PageRoute.REGISTER_ROUTE)}
+
+            }) {
+                Text(text = "注册", color = Color.Gray, fontSize = 18.sp)
+            }
+        },
         titleText = "密码登录"
     )
 }

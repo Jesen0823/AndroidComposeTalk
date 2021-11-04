@@ -28,10 +28,9 @@ import kotlinx.coroutines.launch
  * */
 @Composable
 fun TopBarView(
-    backClick: () -> Unit,
-    actionsClick: () -> Unit,
-    actionsText: String,
+    iconEvent: @Composable (() -> Unit)? = null,
     titleText: String,
+    actionEvent: @Composable RowScope.() -> Unit = {},
 ) {
     TopAppBar(
         title = {
@@ -40,16 +39,8 @@ fun TopBarView(
                 color = Color.Black
             )
         },
-        navigationIcon = {
-            IconButton(onClick = { backClick }) {
-                Icon(Icons.Filled.ArrowBack, null)
-            }
-        },
-        actions = {
-            TextButton(onClick = { actionsClick }) {
-                Text(text = actionsText, color = Color.Gray, fontSize = 18.sp)
-            }
-        },
+        navigationIcon = iconEvent,
+        actions = actionEvent,
         // below line is use to give background color
         backgroundColor = Color.White,
         contentColor = Color.Black,
@@ -147,7 +138,7 @@ fun inputTogButton(
         modifier = Modifier.fillMaxWidth().padding(10.dp,0.dp,10.dp,0.dp),
         onClick = {
             scope.launch { scaffoldState.snackbarHostState.showSnackbar("${viewModel.name}登录成功") }
-        },
+                  },
         enabled = isEnabled,
         shape = RoundedCornerShape(50),
         colors = ButtonDefaults.buttonColors(

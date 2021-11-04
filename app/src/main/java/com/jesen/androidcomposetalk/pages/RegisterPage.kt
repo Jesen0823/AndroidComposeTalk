@@ -1,15 +1,13 @@
-package com.jesen.androidcomposetalk
+package com.jesen.androidcomposetalk.pages
 
-import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import com.jesen.androidcomposetalk.R
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
@@ -17,51 +15,44 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.KeyboardType.Companion.Password
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.jesen.androidcomposetalk.ui.theme.*
+import androidx.compose.ui.unit.sp
+import com.jesen.androidcomposetalk.nav.PageRoute
+import com.jesen.androidcomposetalk.nav.doPageNavBack
+import com.jesen.androidcomposetalk.nav.doPageNavigationTo
+import com.jesen.androidcomposetalk.ui.theme.InputTextField
+import com.jesen.androidcomposetalk.ui.theme.TopBarView
+import com.jesen.androidcomposetalk.ui.theme.inputTogButton
 import com.jesen.androidcomposetalk.viewmodel.InputViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
-class RegisterActivity : ComponentActivity() {
+@Composable
+fun RegisterPage(activity: ComponentActivity){
 
-    private val inputViewModel by viewModels<InputViewModel>()
+    val inputViewModel by activity.viewModels<InputViewModel>()
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    Scaffold(
+        topBar = { RegisterTopBarView(scope) },
+        scaffoldState = scaffoldState
+    ) {
+        Box(Modifier.fillMaxSize()) {
 
-        setContent {
-            AndroidComposeTalkTheme {
-                val scaffoldState = rememberScaffoldState()
-                val scope = rememberCoroutineScope()
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Scaffold(
-                        topBar = { RegisterTopBarView() },
-                        scaffoldState = scaffoldState
-                    ) {
-                        Box(Modifier.fillMaxSize()) {
+            headPicEffect(inputViewModel)
 
-                            val isHide = remember { mutableStateOf(false) }
-                            headPicEffect(inputViewModel)
-
-                            Column(
-                                modifier = Modifier
-                                    .padding(5.dp, 120.dp, 5.dp, 0.dp)
-                                    .fillMaxWidth()
-                            ) {
-                                Spacer(modifier = Modifier.height(2.dp).background(color = Color.Gray))
-                                InputRegisterScreen(inputViewModel, scaffoldState, scope, isHide)
-                            }
-                        }
-                    }
-                }
+            Column(
+                modifier = Modifier
+                    .padding(5.dp, 120.dp, 5.dp, 0.dp)
+                    .fillMaxWidth()
+            ) {
+                Spacer(modifier = Modifier.height(2.dp).background(color = Color.Gray))
+                InputRegisterScreen(inputViewModel, scaffoldState, scope)
             }
         }
     }
-
 }
 
 @Composable
@@ -69,7 +60,6 @@ fun InputRegisterScreen(
     viewModel: InputViewModel,
     scaffoldState: ScaffoldState,
     scope: CoroutineScope,
-    isHide: MutableState<Boolean>
 ) {
     Column(
         Modifier.fillMaxWidth(),
@@ -92,7 +82,7 @@ fun InputRegisterScreen(
         )
         InputTextField(
             label = "密码",
-            keyboardOptions = KeyboardOptions(keyboardType = Password),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             value = viewModel.pwd,
             hint = "请输入密码",
             onValueChanged = { viewModel.onPwdChange(it) },
@@ -102,7 +92,7 @@ fun InputRegisterScreen(
         )
         InputTextField(
             label = "密码确认",
-            keyboardOptions = KeyboardOptions(keyboardType = Password),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             value = viewModel.rePassword,
             hint = "请再次输入密码",
             onValueChanged = { viewModel.onRePwdChange(it) },
@@ -112,7 +102,7 @@ fun InputRegisterScreen(
         )
         InputTextField(
             label = "身份",
-            keyboardOptions = KeyboardOptions(keyboardType = Password),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             value = viewModel.mocId,
             hint = "请输入身份凭证",
             onValueChanged = { viewModel.onMocIdChange(it) },
@@ -122,7 +112,7 @@ fun InputRegisterScreen(
         )
         InputTextField(
             label = "服务id",
-            keyboardOptions = KeyboardOptions(keyboardType = Password),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             value = viewModel.orderId,
             hint = "请输入服务ID后四位",
             onValueChanged = { viewModel.onOrderIdChange(it) },
@@ -163,11 +153,23 @@ fun headPicEffect(viewModel: InputViewModel) {
 
 
 @Composable
-fun RegisterTopBarView() {
+fun RegisterTopBarView(scope: CoroutineScope) {
     TopBarView(
-        backClick = { },
-        actionsClick = { },
-        actionsText = "登录",
+        iconEvent = {
+            IconButton(onClick = {
+                doPageNavBack(route = null)
+            }) {
+                Icon(Icons.Filled.ArrowBack, null)
+            }
+        },
+        actionEvent = {
+            TextButton(onClick = {
+                scope.launch { doPageNavigationTo(PageRoute.LOGIN_ROUTE) }
+
+            }) {
+                Text(text = "登录", color = Color.Gray, fontSize = 18.sp)
+            }
+        },
         titleText = "账号注册"
     )
 }
