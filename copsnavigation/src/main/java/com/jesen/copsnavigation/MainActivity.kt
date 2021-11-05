@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import com.jesen.copsnavigation.lazycolumn.LazyColumnDemo
 import com.jesen.copsnavigation.splash.NavigationSplash
 import com.jesen.copsnavigation.ui.theme.AndroidComposeTalkTheme
 
@@ -23,7 +24,13 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    NavigationSplash()
+                    // 3.0
+                    LazyColumnDemo()
+
+                    // 2.0
+                    //NavigationSplash()
+
+                    // 1.0
                     /*Scaffold(
                         bottomBar = {
                             CustomBottomNavigation(
