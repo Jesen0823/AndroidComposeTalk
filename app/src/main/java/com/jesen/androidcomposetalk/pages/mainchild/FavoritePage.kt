@@ -8,10 +8,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun FavoritePage(){
+fun FavoritePage() {
     Box(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center){
+        contentAlignment = Alignment.Center
+    ) {
         Text(text = "fav")
     }
 }

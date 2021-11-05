@@ -21,15 +21,15 @@ import androidx.compose.ui.unit.sp
 import com.jesen.androidcomposetalk.nav.PageRoute
 import com.jesen.androidcomposetalk.nav.doPageNavBack
 import com.jesen.androidcomposetalk.nav.doPageNavigationTo
-import com.jesen.androidcomposetalk.ui.theme.InputTextField
-import com.jesen.androidcomposetalk.ui.theme.TopBarView
-import com.jesen.androidcomposetalk.ui.theme.inputTogButton
+import com.jesen.androidcomposetalk.ui.InputTextField
+import com.jesen.androidcomposetalk.ui.TopBarView
+import com.jesen.androidcomposetalk.ui.inputTogButton
 import com.jesen.androidcomposetalk.viewmodel.InputViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun RegisterPage(activity: ComponentActivity){
+fun RegisterPage(activity: ComponentActivity) {
 
     val inputViewModel by activity.viewModels<InputViewModel>()
     val scaffoldState = rememberScaffoldState()
@@ -48,7 +48,9 @@ fun RegisterPage(activity: ComponentActivity){
                     .padding(5.dp, 120.dp, 5.dp, 0.dp)
                     .fillMaxWidth()
             ) {
-                Spacer(modifier = Modifier.height(2.dp).background(color = Color.Gray))
+                Spacer(modifier = Modifier
+                    .height(2.dp)
+                    .background(color = Color.Gray))
                 InputRegisterScreen(inputViewModel, scaffoldState, scope)
             }
         }

@@ -1,4 +1,4 @@
-package com.jesen.androidcomposetalk.ui.theme
+package com.jesen.androidcomposetalk.ui
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
@@ -25,21 +25,21 @@ fun CustomCircularProgress(
     indicatorValue: Float = 0f,
     backgroundIndicatorColor: Color = Color.Black,
     backgroundIndicatorStrokeWidth: Float = 4f,
-    foregroundIndicatorColor:Color = Color.Black,
-    foregroundIndicatorStrokeWidth:Float = 4f,
+    foregroundIndicatorColor: Color = Color.Black,
+    foregroundIndicatorStrokeWidth: Float = 4f,
 ) {
     val animatedIndicatorValue = remember {
         Animatable(initialValue = 0f)
     }
-        LaunchedEffect(key1 = indicatorValue, block ={
-            animatedIndicatorValue.animateTo(indicatorValue.toFloat())
-        })
-        val sweepAngle by animateFloatAsState(
-            targetValue = animatedIndicatorValue.value,
-            animationSpec = tween(250)
-        )
+    LaunchedEffect(key1 = indicatorValue, block = {
+        animatedIndicatorValue.animateTo(indicatorValue.toFloat())
+    })
+    val sweepAngle by animateFloatAsState(
+        targetValue = animatedIndicatorValue.value,
+        animationSpec = tween(250)
+    )
 
-        Column(modifier = Modifier
+    Column(modifier = Modifier
         .size(canvasSize)
         .drawBehind {
             backgroundIndicator(
@@ -61,7 +61,7 @@ fun DrawScope.foregroundIndicator(
     sweepAngle: Float = 0f,
     indicatorColor: Color,
     indicatorStrokeWidth: Float
-){
+) {
     drawArc(
         color = indicatorColor,
         startAngle = 90f,

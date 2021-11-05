@@ -1,15 +1,9 @@
 package com.jesen.androidcomposetalk.nav
 
-import androidx.compose.material.BottomNavigation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.jesen.androidcomposetalk.MainActivity
 import com.jesen.androidcomposetalk.pages.*

@@ -22,9 +22,9 @@ import androidx.compose.ui.unit.sp
 import com.jesen.androidcomposetalk.nav.PageRoute
 import com.jesen.androidcomposetalk.nav.doPageNavBack
 import com.jesen.androidcomposetalk.nav.doPageNavigationTo
-import com.jesen.androidcomposetalk.ui.theme.InputTextField
-import com.jesen.androidcomposetalk.ui.theme.TopBarView
-import com.jesen.androidcomposetalk.ui.theme.inputTogButton
+import com.jesen.androidcomposetalk.ui.InputTextField
+import com.jesen.androidcomposetalk.ui.TopBarView
+import com.jesen.androidcomposetalk.ui.inputTogButton
 import com.jesen.androidcomposetalk.viewmodel.InputViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -88,7 +88,7 @@ fun InputLoginScreen(
             viewModel = viewModel,
         )
 
-        inputTogButton("登录", scope, viewModel, scaffoldState,true)
+        inputTogButton("登录", scope, viewModel, scaffoldState, true)
     }
 
 }
@@ -132,7 +132,7 @@ fun LoginTopBarView(scope: CoroutineScope) {
         },
         actionEvent = {
             TextButton(onClick = {
-                scope.launch {doPageNavigationTo(PageRoute.REGISTER_ROUTE)}
+                scope.launch { doPageNavigationTo(PageRoute.REGISTER_ROUTE) }
 
             }) {
                 Text(text = "注册", color = Color.Gray, fontSize = 18.sp)

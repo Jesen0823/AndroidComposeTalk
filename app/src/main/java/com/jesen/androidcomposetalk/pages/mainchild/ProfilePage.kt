@@ -8,10 +8,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun ProfilePage(){
+fun ProfilePage() {
     Box(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center){
+        contentAlignment = Alignment.Center
+    ) {
         Text(text = "profile")
     }
 }

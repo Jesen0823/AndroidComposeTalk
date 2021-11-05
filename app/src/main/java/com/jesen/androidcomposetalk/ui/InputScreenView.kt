@@ -1,4 +1,4 @@
-package com.jesen.androidcomposetalk.ui.theme
+package com.jesen.androidcomposetalk.ui
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
@@ -6,7 +6,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.runtime.*
@@ -19,6 +18,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jesen.androidcomposetalk.ui.theme.primaryColor
+import com.jesen.androidcomposetalk.ui.theme.primaryDeepColor
 import com.jesen.androidcomposetalk.viewmodel.InputViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -65,7 +66,7 @@ fun InputTextField(
 
     // 密码输入类型设置
     val visualTransformation =
-        if (!viewModel.showPwd &&(type == "password" || type == "rePassword")) PasswordVisualTransformation() else VisualTransformation.None
+        if (!viewModel.showPwd && (type == "password" || type == "rePassword")) PasswordVisualTransformation() else VisualTransformation.None
 
     TextField(
         value = value,
@@ -103,7 +104,7 @@ fun InputTextField(
                         )
                     }
                 } else {
-                    IconButton(onClick = { viewModel.onShowPwdChange(true)  }) {
+                    IconButton(onClick = { viewModel.onShowPwdChange(true) }) {
                         Icon(
                             Icons.Outlined.VisibilityOff,
                             contentDescription = null,
@@ -135,10 +136,12 @@ fun inputTogButton(
                 viewModel.orderId.isNotBlank()
     }
     Button(
-        modifier = Modifier.fillMaxWidth().padding(10.dp,0.dp,10.dp,0.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp, 0.dp, 10.dp, 0.dp),
         onClick = {
             scope.launch { scaffoldState.snackbarHostState.showSnackbar("${viewModel.name}登录成功") }
-                  },
+        },
         enabled = isEnabled,
         shape = RoundedCornerShape(50),
         colors = ButtonDefaults.buttonColors(

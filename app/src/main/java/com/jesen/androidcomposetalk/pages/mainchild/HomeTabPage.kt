@@ -27,8 +27,8 @@ import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
 @Composable
-fun HomeTabPage(){
-    val  items = listOf("推荐", "电影", "电视剧", "综艺","纪录片","娱乐","娱乐")
+fun HomeTabPage() {
+    val items = listOf("推荐", "电影", "电视剧", "综艺", "纪录片", "娱乐", "娱乐")
     Surface(color = MaterialTheme.colors.background) {
 
         val tabstr = remember {
@@ -37,7 +37,7 @@ fun HomeTabPage(){
 
         val scope = rememberCoroutineScope()
 
-        val state  = rememberPagerState(
+        val state = rememberPagerState(
             pageCount = items.size, //总页数
             initialOffscreenLimit = 3, //预加载的个数
             infiniteLoop = false, //是否无限循环
@@ -130,7 +130,7 @@ fun HomeTabPage(){
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         when (indexPage) {
-                            in 0..(items.size)  -> Text(text = items[indexPage])
+                            in 0..(items.size) -> Text(text = items[indexPage])
 
                         }
                         Text(text = items[indexPage])

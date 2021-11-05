@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun VideoDetailPage(){
+fun VideoDetailPage() {
     Scaffold() {
         Box(modifier = Modifier.fillMaxSize()) {
             Text("视频详情页呀")

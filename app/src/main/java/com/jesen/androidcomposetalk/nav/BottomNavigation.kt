@@ -68,7 +68,7 @@ fun BottomNavigationScreen(navController: NavController, items: List<Screens>) {
                 onClick = {
                     navController.navigate(screens.route) {
                         launchSingleTop = true
-                        popUpTo(navController.graph.findStartDestination().id){
+                        popUpTo(navController.graph.findStartDestination().id) {
                             // 防止状态丢失
                             saveState = true
                         }
