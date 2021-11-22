@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/JetpackDataStore" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/copsnavigation" />
+            <option value="$PROJECT_DIR$/paging3demo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

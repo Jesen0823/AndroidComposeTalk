@@ -1,50 +1,54 @@
 package com.jesen.paging3demo
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 
-class RecyclerAdapter : PagingDataAdapter<CharacterData, RecyclerAdapter.MyViewHolder>(DiffUtilCallback()) {
+class RecyclerAdapter :
+    PagingDataAdapter<Question, RecyclerAdapter.MyViewHolder>(DiffUtilCallback()) {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        Log.d("Adapter--","getItem: ${getItem(position)}\n position:$position")
+
         holder.bind(getItem(position)!!)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.MyViewHolder{
-        val inflater = LayoutInflater.from(parent.context).inflate(R.layout.recycler_item,parent)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): RecyclerAdapter.MyViewHolder {
+        val inflater =
+            LayoutInflater.from(parent.context).inflate(R.layout.recycler_item, parent, false)
 
         return MyViewHolder(inflater)
     }
 
-    class MyViewHolder(view: View):RecyclerView.ViewHolder(view){
-        val imageVv :ImageView = view.findViewById(R.id.imageVw)
-        val tvName:TextView = view.findViewById(R.id.tvName)
-        val tvDes:TextView = view.findViewById(R.id.tvDesc)
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val tvQuestion: TextView = view.findViewById(R.id.tvQue)
+        private val tvAnsow: TextView = view.findViewById(R.id.tvAns)
+        private val tvExplain: TextView = view.findViewById(R.id.tvExp)
 
-        fun  bind(data: CharacterData){
-            tvName.text = data.name
-            tvDes.text = data.species
-            Glide.with(imageVv)
-                .load(data.image)
-                .into(imageVv)
+        fun bind(data: Question) {
+            Log.d("Adapter--","data: ${data.toString()}")
+            tvQuestion.text = data.question
+            tvAnsow.text = data.answer
+            tvExplain.text = data.explain
         }
     }
 
-    class DiffUtilCallback:DiffUtil.ItemCallback<CharacterData>(){
-        override fun areItemsTheSame(oldItem: CharacterData, newItem: CharacterData): Boolean {
-            return oldItem.name == newItem.name
+    class DiffUtilCallback : DiffUtil.ItemCallback<Question>() {
+        override fun areItemsTheSame(oldItem: Question, newItem: Question): Boolean {
+            return oldItem.question == newItem.question
         }
 
-        override fun areContentsTheSame(oldItem: CharacterData, newItem: CharacterData): Boolean {
-            return oldItem.name == newItem.name && oldItem.species == newItem.species
+        override fun areContentsTheSame(oldItem: Question, newItem: Question): Boolean {
+            return oldItem.question == newItem.question
         }
 
     }
-
 }

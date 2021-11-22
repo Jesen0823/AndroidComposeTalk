@@ -1,5 +1,6 @@
 package com.jesen.paging3demo
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -8,13 +9,17 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import kotlinx.coroutines.flow.Flow
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val retrofitService: RetrofitService) : ViewModel() {
 
-    var retrofitService: RetrofitService = RetrofitInstance.getRetroInstance().create(RetrofitService::class.java)
 
-    fun getListData(): Flow<PagingData<CharacterData>> {
-        return Pager(config = PagingConfig(pageSize = 43, maxSize = 200),
-            pagingSourceFactory = { CharacterPagingSource(retrofitService) }).flow.cachedIn(
+    fun getListData(): Flow<PagingData<Question>> {
+        Log.d("MainViewModel", "getListData")
+        return Pager(
+            config = PagingConfig(pageSize = 10),
+            pagingSourceFactory = {
+                QuestionPagingSource(retrofitService)
+            }
+        ).flow.cachedIn(
             viewModelScope
         )
     }
