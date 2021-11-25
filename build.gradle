@@ -25,6 +25,7 @@ ext {
 
     material_version = '1.4.0'
     accompanist_version = '0.21.2-beta'
+    accompanist_coil = '0.12.0'
     activity_compose_version = '1.4.0'
 
     lifecycle_viewmodel_compose = '2.4.0'
