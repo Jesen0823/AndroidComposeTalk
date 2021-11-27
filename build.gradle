@@ -48,5 +48,5 @@ ext {
 
     kotlinx_coroutines = "1.5.2"
 
-    datastore_preferences = '1.0.0'
+    datastore_preferences = '1.0.0-alpha01'
 }
