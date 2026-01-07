@@ -8,6 +8,8 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.jesen.constraint.demo.*
+import com.jesen.constraint.demo.DemoInlineDSL
 import com.jesen.constraint.ui.theme.AndroidComposeTalkTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,22 +19,10 @@ class MainActivity : ComponentActivity() {
             AndroidComposeTalkTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    //LargeConstraintLayoutDemo3()
+                    DemoTagConstraintSet()
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    AndroidComposeTalkTheme {
-        Greeting("Android")
     }
 }

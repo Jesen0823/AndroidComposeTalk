@@ -1,4 +1,4 @@
-package com.jesen.androidcomposetalk.ui
+package com.jesen.androidcomposetalk.ui.widget
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
@@ -22,7 +22,6 @@ import com.jesen.androidcomposetalk.ui.theme.primaryColor
 import com.jesen.androidcomposetalk.ui.theme.primaryDeepColor
 import com.jesen.androidcomposetalk.viewmodel.InputViewModel
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 /**
  * 顶部TopBar
@@ -121,14 +120,15 @@ fun InputTextField(
  * 登录注册按钮
  * */
 @Composable
-fun inputTogButton(
+fun InputTogButton(
     text: String,
     scope: CoroutineScope,
     viewModel: InputViewModel,
     scaffoldState: ScaffoldState,
-    isLogin: Boolean = false,
+    onClick: () -> Unit,
+    isLoginType: Boolean = false,
 ) {
-    val isEnabled = if (isLogin) {
+    val isEnabled = if (isLoginType) {
         viewModel.name.isNotBlank() && viewModel.pwd.isNotBlank()
     } else {
         viewModel.name.isNotBlank() && viewModel.pwd.isNotBlank() &&
@@ -138,10 +138,8 @@ fun inputTogButton(
     Button(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp, 0.dp, 10.dp, 0.dp),
-        onClick = {
-            scope.launch { scaffoldState.snackbarHostState.showSnackbar("${viewModel.name}登录成功") }
-        },
+            .padding(start = 10.dp, top = 20.dp, end = 10.dp, bottom = 0.dp),
+        onClick = onClick,
         enabled = isEnabled,
         shape = RoundedCornerShape(50),
         colors = ButtonDefaults.buttonColors(

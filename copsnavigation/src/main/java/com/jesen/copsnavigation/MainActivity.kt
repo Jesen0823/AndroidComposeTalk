@@ -27,10 +27,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     // 3.0
-                    LazyColumnDemo()
+                    //LazyColumnDemo()
 
                     // 2.0
-                    //NavigationSplash()
+                    NavigationSplash()
 
                     // 1.0
                     /*Scaffold(

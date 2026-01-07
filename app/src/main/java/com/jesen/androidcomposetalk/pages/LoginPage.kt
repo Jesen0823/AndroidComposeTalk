@@ -19,14 +19,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.lifecycleScope
 import com.jesen.androidcomposetalk.nav.PageRoute
 import com.jesen.androidcomposetalk.nav.doPageNavBack
 import com.jesen.androidcomposetalk.nav.doPageNavigationTo
-import com.jesen.androidcomposetalk.ui.InputTextField
-import com.jesen.androidcomposetalk.ui.TopBarView
-import com.jesen.androidcomposetalk.ui.inputTogButton
+import com.jesen.androidcomposetalk.ui.widget.InputTextField
+import com.jesen.androidcomposetalk.ui.widget.TopBarView
+import com.jesen.androidcomposetalk.ui.widget.InputTogButton
+import com.jesen.androidcomposetalk.util.oLog
 import com.jesen.androidcomposetalk.viewmodel.InputViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @Composable
@@ -34,6 +37,28 @@ fun LoginPage(activity: ComponentActivity) {
     val inputViewModel by activity.viewModels<InputViewModel>()
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+
+    LaunchedEffect(key1 = inputViewModel.loginUIState){
+        activity.lifecycleScope.launch {
+            inputViewModel.loginUIState.collect {
+                when(it){
+                    is InputViewModel.LoginUIState.Success -> {
+                        // 登录成功
+                        oLog(" login page success :${it.result.code}")
+                    }
+                    is InputViewModel.LoginUIState.Error ->{
+                        oLog(" login page error :${it.message}")
+                        scaffoldState.snackbarHostState.showSnackbar(it.message)
+                    }
+                    is InputViewModel.LoginUIState.Loading->{
+                        // 登录中。。。
+                        oLog(" login...")
+                    }
+                    else ->Unit
+                }
+            }
+        }
+    }
 
     Scaffold(
         topBar = { LoginTopBarView(scope) },
@@ -88,7 +113,7 @@ fun InputLoginScreen(
             viewModel = viewModel,
         )
 
-        inputTogButton("登录", scope, viewModel, scaffoldState, true)
+        InputTogButton("登录", scope, viewModel, scaffoldState,onClick = {viewModel.doLogin()} ,true)
     }
 
 }

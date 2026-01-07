@@ -1,7 +1,10 @@
 package com.jesen.androidcomposetalk.network
 
 import com.jesen.androidcomposetalk.BuildConfig
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.internal.connection.ConnectInterceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,16 +24,28 @@ object RetrofitClient {
             logInterceptor.level = HttpLoggingInterceptor.Level.NONE
         }
 
-        val okhttpClient = OkHttpClient.Builder().addInterceptor(logInterceptor)
+        // 请求头拦截器
+        val headerInterceptor = Interceptor { chain ->
+            val original: Request = chain.request()
+            val requestBuilder: Request.Builder = original.newBuilder()
+                .header("content-type", "application/json")
+            val request: Request = requestBuilder.build()
+            chain.proceed(request)
+        }
+
+        val okhttpClient = OkHttpClient.Builder()
+            .addInterceptor(logInterceptor)
+            .addInterceptor(headerInterceptor)
             .connectTimeout(5, TimeUnit.SECONDS)//设置超时时间
             .retryOnConnectionFailure(true).build()
 
         Retrofit.Builder()
             .client(okhttpClient)
-            .baseUrl("https://way.jd.com")
+            .baseUrl("https://api.devio.org")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
 
     fun <T> createApi(clazz: Class<T>): T {
         return instance.create(clazz) as T

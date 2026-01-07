@@ -1,6 +1,7 @@
 package com.jesen.copsnavigation.splash
 
 import android.view.animation.OvershootInterpolator
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -45,7 +46,7 @@ fun NavigationSplash(){
 @Composable
 fun SplashScreen(navController: NavController){
     val scale = remember{
-        androidx.compose.animation.core.Animatable(0f)
+        Animatable(0f)
     }
     navController.enableOnBackPressed(false)
     LaunchedEffect(key1 = true){

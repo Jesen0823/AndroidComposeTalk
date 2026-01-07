@@ -21,9 +21,9 @@ import androidx.compose.ui.unit.sp
 import com.jesen.androidcomposetalk.nav.PageRoute
 import com.jesen.androidcomposetalk.nav.doPageNavBack
 import com.jesen.androidcomposetalk.nav.doPageNavigationTo
-import com.jesen.androidcomposetalk.ui.InputTextField
-import com.jesen.androidcomposetalk.ui.TopBarView
-import com.jesen.androidcomposetalk.ui.inputTogButton
+import com.jesen.androidcomposetalk.ui.widget.InputTextField
+import com.jesen.androidcomposetalk.ui.widget.TopBarView
+import com.jesen.androidcomposetalk.ui.widget.InputTogButton
 import com.jesen.androidcomposetalk.viewmodel.InputViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -123,7 +123,7 @@ fun InputRegisterScreen(
             leadingIcon = Icons.Default.AdminPanelSettings,
         )
 
-        inputTogButton("注册", scope, viewModel, scaffoldState)
+        InputTogButton("注册", scope, viewModel, scaffoldState,onClick = {})
     }
 
 }

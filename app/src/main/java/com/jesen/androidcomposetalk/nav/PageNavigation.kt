@@ -70,4 +70,3 @@ fun doPageNavBack(route: String?) {
         navController.popBackStack(route = it, inclusive = false)
     } ?: navController.popBackStack()
 }
-

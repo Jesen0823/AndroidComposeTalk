@@ -12,7 +12,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.jesen.androidcomposetalk.nav.PageNavHost
+import com.jesen.androidcomposetalk.pages.MainPage
 import com.jesen.androidcomposetalk.ui.theme.AndroidComposeTalkTheme
+import com.jesen.androidcomposetalk.util.ColorUtil
 
 /**
  *  Home page
@@ -26,6 +28,7 @@ class MainActivity : ComponentActivity() {
     @ExperimentalPagerApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             pageNavController = rememberNavController()
 
