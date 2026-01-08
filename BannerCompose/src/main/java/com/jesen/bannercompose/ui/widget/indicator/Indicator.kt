@@ -1,8 +1,7 @@
 package com.jesen.bannercompose.ui.widget.indicator
 
 import androidx.compose.runtime.Composable
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.PagerState
+import androidx.compose.foundation.pager.PagerState
 
 /**
  * 指示器基类，如果需要自定义指示器，需要继承此类，并实现 [DrawIndicator] 方法
@@ -12,7 +11,6 @@ abstract class Indicator {
 
     abstract var gravity: Int
 
-    @ExperimentalPagerApi
     @Composable
     abstract fun DrawIndicator(pagerState: PagerState)
 

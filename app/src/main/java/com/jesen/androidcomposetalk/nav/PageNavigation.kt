@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.google.accompanist.pager.ExperimentalPagerApi
+
 import com.jesen.androidcomposetalk.MainActivity
 import com.jesen.androidcomposetalk.pages.*
 
@@ -21,7 +21,6 @@ object PageRoute {
 /**
  * 将页面与路由关联
  * */
-@ExperimentalPagerApi
 @Composable
 fun PageNavHost(mainActivity: MainActivity) {
     val navHostController = MainActivity.pageNavController!!

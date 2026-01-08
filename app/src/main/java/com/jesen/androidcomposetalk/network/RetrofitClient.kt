@@ -46,7 +46,6 @@ object RetrofitClient {
             .build()
     }
 
-
     fun <T> createApi(clazz: Class<T>): T {
         return instance.create(clazz) as T
     }

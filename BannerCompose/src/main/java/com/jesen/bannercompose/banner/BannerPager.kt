@@ -8,10 +8,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.PagerState
-import com.google.accompanist.pager.rememberPagerState
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import com.jesen.bannercompose.model.BannerBean
 import com.jesen.bannercompose.ui.widget.BannerCard
 import com.jesen.bannercompose.ui.widget.config.BannerConfig
@@ -34,7 +33,6 @@ private const val TAGS = "BannerPager"
  * [Indicator] 即可。
  * @param onBannerClick Banner 点击事件的回调
  */
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun <T : BannerBean> BannerPager(
     modifier: Modifier = Modifier,
@@ -47,8 +45,9 @@ fun <T : BannerBean> BannerPager(
         throw NullPointerException("items is not null")
     }
 
-    //val pagerState = rememberPagerState(pageCount = items.size)
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState {
+            items.size
+        }
 
 
     if (config.repeat) {
@@ -57,7 +56,6 @@ fun <T : BannerBean> BannerPager(
 
     Box(modifier = modifier.height(config.bannerHeight)) {
         HorizontalPager(
-            count = items.size,
             state = pagerState,
             ) { page ->
             val item = items[page]
@@ -81,7 +79,6 @@ var mTimerTask: TimerTask? = null
 
 
 
-@ExperimentalPagerApi
 @Composable
 fun StartBanner(pagerState: PagerState, intervalTime: Long) {
     val coroutineScope = rememberCoroutineScope()

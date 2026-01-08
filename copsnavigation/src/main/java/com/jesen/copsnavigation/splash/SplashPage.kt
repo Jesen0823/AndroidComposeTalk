@@ -25,43 +25,42 @@ import com.jesen.copsnavigation.R
 import kotlinx.coroutines.delay
 
 @Composable
-fun NavigationSplash(){
+fun NavigationSplash() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "splash_screen" ){
+    NavHost(navController = navController, startDestination = "splash_screen") {
 
-        composable("splash_screen"){
+        composable("splash_screen") {
             SplashScreen(navController = navController)
 
         }
 
-        composable("main_screen"){
-            Box(modifier = Modifier.fillMaxSize(),contentAlignment = Alignment.Center){
-                Text(text="Main Screen")
+        composable("main_screen") {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(text = "Main Screen")
             }
-
         }
     }
 }
 
 @Composable
-fun SplashScreen(navController: NavController){
-    val scale = remember{
+fun SplashScreen(navController: NavController) {
+    val scale = remember {
         Animatable(0f)
     }
-    navController.enableOnBackPressed(false)
-    LaunchedEffect(key1 = true){
-        scale.animateTo(targetValue = 1.0f,
+    LaunchedEffect(key1 = true) {
+        scale.animateTo(
+            targetValue = 1.0f,
             animationSpec = tween(
                 durationMillis = 2000,
                 easing = {
                     OvershootInterpolator(2f).getInterpolation(it)
                 }
             )
-            )
+        )
         delay(3000L)
         navController.navigate("main_screen") {
             launchSingleTop = false
-            popUpTo(navController.graph.findStartDestination().id){
+            popUpTo(navController.graph.findStartDestination().id) {
                 // 防止状态丢失
                 saveState = false
             }
@@ -70,8 +69,14 @@ fun SplashScreen(navController: NavController){
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
-    ){
-        Image(painter = painterResource(id = R.drawable.splash),modifier = Modifier.scale(scale.value).fillMaxSize(), contentDescription = null)
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.splash),
+            modifier = Modifier
+                .scale(scale.value)
+                .fillMaxSize(),
+            contentDescription = null
+        )
 
     }
 }

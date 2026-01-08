@@ -10,7 +10,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.google.accompanist.pager.ExperimentalPagerApi
+
 import com.jesen.androidcomposetalk.nav.PageNavHost
 import com.jesen.androidcomposetalk.pages.MainPage
 import com.jesen.androidcomposetalk.ui.theme.AndroidComposeTalkTheme
@@ -25,19 +25,18 @@ class MainActivity : ComponentActivity() {
         var pageNavController: NavHostController? = null
     }
 
-    @ExperimentalPagerApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             pageNavController = rememberNavController()
-
             AndroidComposeTalkTheme {
                 Surface(
                     color = MaterialTheme.colors.background,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    Scaffold() {
+                    @Suppress("UnusedMaterialScaffoldPaddingParameter")
+                    Scaffold() { _ ->
                         PageNavHost(this)
                     }
                 }

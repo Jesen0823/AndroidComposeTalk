@@ -9,7 +9,8 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun VideoDetailPage() {
-    Scaffold() {
+    @Suppress("UnusedMaterialScaffoldPaddingParameter")
+    Scaffold() { _ ->
         Box(modifier = Modifier.fillMaxSize()) {
             Text("视频详情页呀")
         }

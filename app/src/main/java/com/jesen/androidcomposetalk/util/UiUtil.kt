@@ -17,12 +17,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.SecureFlagPolicy
-import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 import com.jesen.androidcomposetalk.R
-
 
 @Composable
 fun SnackbarShow(content:String){
@@ -38,19 +37,16 @@ fun SnackbarShow(content:String){
     )
 }
 
-@ExperimentalCoilApi
 @Composable
 fun CoilImage(url: String?, modifier: Modifier,radius:Float = 4f) {
     Image(
-        painter = rememberImagePainter(
-            data = url,
-            builder = {
-                transformations(
-                    RoundedCornersTransformation(radius)
-                )
-                placeholder(R.drawable.place_img)
-                error(R.drawable.place_img)
-            },
+        painter = rememberAsyncImagePainter(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(url)
+                .transformations(RoundedCornersTransformation(radius))
+                .placeholder(R.drawable.place_img)
+                .error(R.drawable.place_img)
+                .build()
         ),
         contentDescription = null,
         modifier = modifier,
@@ -58,19 +54,16 @@ fun CoilImage(url: String?, modifier: Modifier,radius:Float = 4f) {
     )
 }
 
-@ExperimentalCoilApi
 @Composable
 fun CoilCircleImage(url: String?, modifier: Modifier) {
     Image(
-        painter = rememberImagePainter(
-            data = url,
-            builder = {
-                transformations(
-                    CircleCropTransformation()
-                )
-                placeholder(R.drawable.place_head)
-                error(R.drawable.place_head)
-            },
+        painter = rememberAsyncImagePainter(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(url)
+                .transformations(CircleCropTransformation())
+                .placeholder(R.drawable.place_head)
+                .error(R.drawable.place_head)
+                .build()
         ),
         contentDescription = null,
         modifier = modifier,
@@ -81,7 +74,7 @@ fun CoilCircleImage(url: String?, modifier: Modifier) {
 
 @ExperimentalComposeUiApi
 @Composable
-private fun showAlertDialog(titleStr:String?,contentStr: String,confirmClick:()->Unit,dismissClick:()->Unit) {
+private fun ShowAlertDialog(titleStr:String?,contentStr: String,confirmClick:()->Unit,dismissClick:()->Unit) {
     val alertDialog = remember { mutableStateOf(false) }
     val context = LocalContext.current
     if (alertDialog.value) {

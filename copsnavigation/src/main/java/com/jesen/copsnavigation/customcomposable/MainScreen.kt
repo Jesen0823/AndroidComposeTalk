@@ -31,10 +31,10 @@ fun MainScreen(){
         },
         backgroundColor = MaterialTheme.colors.primary,
         contentColor = MaterialTheme.colors.onSurface,
-    ) {
+    ) { padding ->
         val commonColor = remember { mutableStateOf(Color.Blue) }
 
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize().padding(padding)) {
             ColorBox()
             Spacer(modifier = Modifier.height(10.dp))
             Box(

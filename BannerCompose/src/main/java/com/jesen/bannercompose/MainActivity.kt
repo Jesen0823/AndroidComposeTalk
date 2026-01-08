@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
 
     private val viewModel by viewModels<MainViewModel>()
     private lateinit var mSensorManager: SensorManager
-    private lateinit var mMagneticSensor: Sensor
+    private var mMagneticSensor: Sensor? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

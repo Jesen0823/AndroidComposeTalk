@@ -8,8 +8,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.*
 import com.jesen.androidcomposetalk.R
 import androidx.compose.ui.Alignment
@@ -63,8 +63,8 @@ fun LoginPage(activity: ComponentActivity) {
     Scaffold(
         topBar = { LoginTopBarView(scope) },
         scaffoldState = scaffoldState
-    ) {
-        Box(Modifier.fillMaxSize()) {
+    ) { padding ->
+        Box(Modifier.fillMaxSize().padding(padding).padding(horizontal = 16.dp)) {
 
             HeaderEffect(inputViewModel)
 
@@ -152,7 +152,7 @@ fun LoginTopBarView(scope: CoroutineScope) {
             IconButton(onClick = {
                 doPageNavBack(route = null)
             }) {
-                Icon(Icons.Filled.ArrowBack, null)
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
             }
         },
         actionEvent = {

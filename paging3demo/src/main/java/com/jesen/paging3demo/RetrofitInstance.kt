@@ -13,7 +13,8 @@ class RetrofitInstance {
         fun getRetroInstance(): Retrofit {
 
             val logInterceptor = HttpLoggingInterceptor()
-            if (BuildConfig.DEBUG) {
+            //暂时使用常量true来替代BuildConfig.DEBUG
+            if (true) {
                 //显示日志
                 logInterceptor.level = HttpLoggingInterceptor.Level.BODY
             } else {

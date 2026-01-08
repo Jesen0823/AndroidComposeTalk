@@ -21,7 +21,6 @@ import retrofit2.http.Query
  *
  * */
 interface LoginServiceApi : BaseApi {
-
     @Headers(
         "$AUTH_TOKEN_K: $AUTH_TOKEN_V",
         "$COURSE_FLAG_K: $COURSE_FLAG_V"

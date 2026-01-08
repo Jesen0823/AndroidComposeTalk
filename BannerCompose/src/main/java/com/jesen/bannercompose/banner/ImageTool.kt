@@ -9,8 +9,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role.Companion.Image
-import com.google.accompanist.coil.rememberCoilPainter
+import coil.compose.rememberAsyncImagePainter
 
 /**
  * 图片加载工具
@@ -32,7 +31,7 @@ fun ImageLoader(
         is String -> {
             val painter = if (data.startsWith("https://") || data.startsWith("http://")) {
                 Log.d(TAG, "PostCardPopular: 加载网络图片")
-                rememberCoilPainter(data)
+                rememberAsyncImagePainter(data)
             } else {
                 Log.d(TAG, "PostCardPopular: 加载本地图片")
                 val bitmap = BitmapFactory.decodeFile(data)

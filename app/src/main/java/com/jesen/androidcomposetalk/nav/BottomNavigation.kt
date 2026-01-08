@@ -1,12 +1,15 @@
 package com.jesen.androidcomposetalk.nav
 
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -14,7 +17,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.google.accompanist.pager.ExperimentalPagerApi
+
 import com.jesen.androidcomposetalk.R
 import com.jesen.androidcomposetalk.pages.mainchild.FavoritePage
 import com.jesen.androidcomposetalk.pages.mainchild.HomeTabPage
@@ -25,7 +28,8 @@ import com.jesen.androidcomposetalk.ui.theme.primaryDeepColor
 
 sealed class Screens(val title: String, val route: String, @DrawableRes val icons: Int) {
 
-    object Home : Screens(title = "首页", route = "home_route", icons = R.drawable.ic_twotone_home_24)
+    object Home :
+        Screens(title = "首页", route = "home_route", icons = R.drawable.ic_twotone_home_24)
 
     object Ranking :
         Screens(title = "排行", route = "ranking_route", icons = R.drawable.ic_twotone_sort_24)
@@ -37,21 +41,20 @@ sealed class Screens(val title: String, val route: String, @DrawableRes val icon
         Screens(title = "我的", route = "profile_route", icons = R.drawable.ic_twotone_person_24)
 }
 
-@ExperimentalPagerApi
 @Composable
-fun BottomNavHost(navHostController: NavHostController) {
+fun BottomNavHost(navHostController: NavHostController, padding: PaddingValues) {
     NavHost(navController = navHostController, startDestination = Screens.Home.route) {
         composable(route = Screens.Home.route) {
-            HomeTabPage()
+            HomeTabPage(modifier = Modifier.padding(padding))
         }
         composable(route = Screens.Ranking.route) {
-            RankingPage()
+            RankingPage(modifier = Modifier.padding(padding))
         }
         composable(route = Screens.Favorite.route) {
-            FavoritePage()
+            FavoritePage(modifier = Modifier.padding(padding))
         }
         composable(route = Screens.Profile.route) {
-            ProfilePage()
+            ProfilePage(modifier = Modifier.padding(padding))
         }
     }
 }

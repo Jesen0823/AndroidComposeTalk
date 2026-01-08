@@ -156,7 +156,7 @@ fun InputTogButton(
  * 绘制分割线
  * */
 @Composable
-fun drawDiverLine() {
+fun DrawDiverLine() {
     Canvas(modifier = Modifier
         .fillMaxWidth()
         .height(2.dp), onDraw = {

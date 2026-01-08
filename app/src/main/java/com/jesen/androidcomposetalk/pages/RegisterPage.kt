@@ -9,6 +9,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import com.jesen.androidcomposetalk.R
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -39,9 +40,9 @@ fun RegisterPage(activity: ComponentActivity) {
         topBar = { RegisterTopBarView(scope) },
         scaffoldState = scaffoldState
     ) {
-        Box(Modifier.fillMaxSize()) {
+        Box(Modifier.fillMaxSize().padding(it)) {
 
-            headPicEffect(inputViewModel)
+            HeadPicEffect(inputViewModel)
 
             Column(
                 modifier = Modifier
@@ -130,7 +131,7 @@ fun InputRegisterScreen(
 
 
 @Composable
-fun headPicEffect(viewModel: InputViewModel) {
+fun HeadPicEffect(viewModel: InputViewModel) {
     Row(
         modifier = Modifier
             .fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween
@@ -161,7 +162,7 @@ fun RegisterTopBarView(scope: CoroutineScope) {
             IconButton(onClick = {
                 doPageNavBack(route = null)
             }) {
-                Icon(Icons.Filled.ArrowBack, null)
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
             }
         },
         actionEvent = {

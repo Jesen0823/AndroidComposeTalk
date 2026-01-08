@@ -13,9 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.pager.HorizontalPager
 import com.jesen.androidcomposetalk.R
 import kotlinx.coroutines.launch
 
@@ -27,11 +26,10 @@ import kotlinx.coroutines.launch
  *
  * */
 
-@ExperimentalPagerApi
 @Composable
-fun HomeTabPage() {
+fun HomeTabPage(modifier: Modifier = Modifier) {
     val items = listOf("推荐", "电影", "电视剧", "综艺", "纪录片", "娱乐", "新闻")
-    Surface(color = MaterialTheme.colors.background) {
+    Surface(color = MaterialTheme.colors.background, modifier = modifier) {
 
         val tabstr = remember {
             mutableStateOf(items[0])
@@ -40,12 +38,10 @@ fun HomeTabPage() {
         val scope = rememberCoroutineScope()
 
         val state = rememberPagerState(
-            //pageCount = items.size, //总页数
-            //initialOffscreenLimit = 3, //预加载的个数
-            //infiniteLoop = false, //是否无限循环
             initialPage = 0 //初始页面
-        )
-        /*val state = rememberPagerState(
+        ) {
+            items.size
+        }/*val state = rememberPagerState(
             //总页数
             pageCount = items.size,
         )*/
@@ -66,8 +62,7 @@ fun HomeTabPage() {
                             )
                         )
                     },
-                    divider = {}
-                ) {
+                    divider = {}) {
                     items.forEachIndexed { index, title ->
                         val selected = index == items.indexOf(tabstr.value)
                         Tab(
@@ -79,7 +74,7 @@ fun HomeTabPage() {
                                     state.scrollToPage(index)
                                 }
                             },
-                            text = { Text(text = title,color = Color.Green) },
+                            text = { Text(text = title, color = Color.Green) },
                             selectedContentColor = Color.Blue,
                             unselectedContentColor = Color.Black
                         )
@@ -99,15 +94,13 @@ fun HomeTabPage() {
                                 tabIndicator[items.indexOf(
                                     tabstr.value
                                 )]
-                            ),
-                            color = Color.Cyan
+                            ), color = Color.Cyan
                         )
                     },
                     backgroundColor = colorResource(id = R.color.purple_500),
                     divider = {
                         TabRowDefaults.Divider()
-                    }
-                ) {
+                    }) {
                     items.forEachIndexed { index, title ->
                         val selected = index == items.indexOf(tabstr.value)
                         Tab(
@@ -121,16 +114,13 @@ fun HomeTabPage() {
                                 scope.launch {
                                     state.scrollToPage(index)
                                 }
-                            }
-                        )
+                            })
                     }
                 }
 
                 // 横向Pager类似PagerView
                 HorizontalPager(
-                    state = state,
-                    count = items.size,
-                    reverseLayout = false
+                    state = state, reverseLayout = false
                 ) { indexPage ->
                     Column(
                         Modifier

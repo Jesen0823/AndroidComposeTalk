@@ -8,8 +8,6 @@ val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 val primaryColor = Color(0xffff9db5)
 val primaryDeepColor = Color(0xfffb7299)
-
-
 val gray50 = Color(0xFFFAFAFA)
 val gray100 = Color(0xFFF5F5F5)
 val gray200 = Color(0xFFEEEEEE)

@@ -6,8 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.PagerState
+import androidx.compose.foundation.pager.PagerState
 import com.jesen.bannercompose.ui.widget.indicator.BannerGravity.BottomCenter
 import com.jesen.bannercompose.ui.widget.indicator.BannerGravity.BottomLeft
 import com.jesen.bannercompose.ui.widget.indicator.BannerGravity.BottomRight
@@ -31,7 +30,6 @@ class CircleIndicator(
     override var gravity: Int = BottomCenter,
 ) : Indicator() {
 
-    @ExperimentalPagerApi
     @Composable
     override fun DrawIndicator(pagerState: PagerState) {
         for (pageIndex in 0 until pagerState.pageCount) {

@@ -16,8 +16,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.PagerState
+import androidx.compose.foundation.pager.PagerState
 import com.jesen.bannercompose.ui.widget.indicator.BannerGravity
 import com.jesen.bannercompose.ui.widget.indicator.BannerGravity.BottomRight
 import com.jesen.bannercompose.ui.widget.indicator.Indicator
@@ -39,7 +38,6 @@ class NumberIndicator(
     override var gravity: Int = BottomRight,
 ) : Indicator() {
 
-    @OptIn(ExperimentalPagerApi::class)
     @Composable
     override fun DrawIndicator(pagerState: PagerState) {
         val alignment: Alignment = when (gravity) {

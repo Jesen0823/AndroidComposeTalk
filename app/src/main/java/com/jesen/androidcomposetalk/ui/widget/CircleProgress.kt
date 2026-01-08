@@ -1,4 +1,4 @@
-package com.jesen.androidcomposetalk.ui
+package com.jesen.androidcomposetalk.ui.widget
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
@@ -95,6 +95,6 @@ fun DrawScope.backgroundIndicator(
 
 @Preview
 @Composable
-fun showCustomCircularProgress() {
+fun ShowCustomCircularProgress() {
     CustomCircularProgress()
 }
